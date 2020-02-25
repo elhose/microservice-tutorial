@@ -11,6 +11,7 @@ import tt.psc.com.microservicetutorial.web.services.BeerService;
 import javax.validation.Valid;
 import java.util.UUID;
 
+@Deprecated
 @RequestMapping("api/v1/beer")
 @RestController
 public class BeerController {
