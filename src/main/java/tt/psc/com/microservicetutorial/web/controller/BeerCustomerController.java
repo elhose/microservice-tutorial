@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import tt.psc.com.microservicetutorial.web.model.BeerCustomer;
 import tt.psc.com.microservicetutorial.web.services.BeerCustomerService;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/customer")
@@ -27,7 +31,7 @@ public class BeerCustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<BeerCustomer> addCustomer(@RequestBody BeerCustomer beerCustomer){
+    public ResponseEntity<BeerCustomer> addCustomer(@Valid @RequestBody BeerCustomer beerCustomer){
         BeerCustomer savedCustomer = beerCustomerService.addCustomer(beerCustomer);
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -37,7 +41,7 @@ public class BeerCustomerController {
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity<BeerCustomer> editBeer(@RequestBody BeerCustomer beerCustomer, @PathVariable("beerId") UUID beerId){
+    public ResponseEntity<BeerCustomer> editBeer(@Valid @RequestBody BeerCustomer beerCustomer, @PathVariable("beerId") UUID beerId){
         beerCustomerService.editBeerById(beerCustomer, beerId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -47,5 +51,16 @@ public class BeerCustomerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBeer(@PathVariable("beerId") UUID beerId){
         beerCustomerService.deleteBeer(beerId);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<List> validationErrorHandler(ConstraintViolationException e){
+        List<String> errors = new ArrayList<>(e.getConstraintViolations().size());
+
+        e.getConstraintViolations().forEach(
+                constraintViolation -> errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage())
+        );
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
