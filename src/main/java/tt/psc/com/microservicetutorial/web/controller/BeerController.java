@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import tt.psc.com.microservicetutorial.web.model.BeerDto;
 import tt.psc.com.microservicetutorial.web.services.BeerService;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RequestMapping("api/v1/beer")
@@ -27,7 +28,7 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity putBeer(@RequestBody BeerDto beerDto) {
+    public ResponseEntity putBeer(@Valid @RequestBody BeerDto beerDto) {
 
         BeerDto savedBeer = beerService.saveBeer(beerDto);
 
@@ -38,7 +39,7 @@ public class BeerController {
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity editBeer(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto) {
+    public ResponseEntity editBeer(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
 
         beerService.updateBeer(beerDto, beerId);
 
