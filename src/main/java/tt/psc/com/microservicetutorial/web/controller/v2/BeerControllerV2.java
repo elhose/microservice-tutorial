@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tt.psc.com.microservicetutorial.web.model.v2.BeerDtoV2;
-import tt.psc.com.microservicetutorial.web.services.v2.BeerServiceV2;
+import tt.psc.com.microservicetutorial.services.v2.BeerServiceV2;
 
 import javax.validation.Valid;
 import java.util.UUID;

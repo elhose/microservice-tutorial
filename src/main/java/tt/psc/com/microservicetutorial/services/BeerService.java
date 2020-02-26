@@ -1,4 +1,4 @@
-package tt.psc.com.microservicetutorial.web.services;
+package tt.psc.com.microservicetutorial.services;
 
 import tt.psc.com.microservicetutorial.web.model.BeerDto;
 

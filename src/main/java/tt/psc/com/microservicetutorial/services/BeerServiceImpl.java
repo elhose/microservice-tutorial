@@ -1,4 +1,4 @@
-package tt.psc.com.microservicetutorial.web.services;
+package tt.psc.com.microservicetutorial.services;
 
 import org.springframework.stereotype.Service;
 import tt.psc.com.microservicetutorial.web.model.BeerDto;

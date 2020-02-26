@@ -1,4 +1,4 @@
-package tt.psc.com.microservicetutorial.web.services;
+package tt.psc.com.microservicetutorial.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
