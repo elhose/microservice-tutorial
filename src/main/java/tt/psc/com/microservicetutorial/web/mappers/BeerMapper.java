@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import tt.psc.com.microservicetutorial.domain.Beer;
 import tt.psc.com.microservicetutorial.web.model.BeerDto;
 
-@Mapper
+@Mapper(uses = {DateMapper.class})
 public interface BeerMapper {
     BeerDto beerToBeerDto(Beer beer);
     Beer beerDtoToBeer(BeerDto beerDto);
